@@ -8,6 +8,7 @@ use App\Support\Seo;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Live site: always build https:// links (canonical tags, sitemap, redirects), even behind a proxy.
+        if ($this->app->isProduction()) {
+            URL::forceScheme('https');
+        }
+
         RateLimiter::for('admin-login', fn (Request $request) => Limit::perMinute(5)->by(strtolower((string) $request->input('email')).'|'.$request->ip()));
 
         View::composer(['layouts.app', 'pages.contact', 'catalog.product'], function ($view) {

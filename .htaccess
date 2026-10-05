@@ -1,0 +1,32 @@
+# Only needed when the domain's document root is this project folder instead of public/.
+# Sends every request into public/ so Laravel handles it, and blocks the app's private files.
+
+Options -Indexes
+
+# Never serve dotfiles such as .env or .git, even by accident.
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Send http:// visitors to https:// (skipped on localhost; also works behind a proxy or Cloudflare).
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Block direct access to app code, config, logs and dependencies.
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|node_modules|Lakshika_Enterprises_Brand_Kit)(/|$) - [F,L,NC]
+    RewriteRule ^(\.env.*|\.git.*|artisan|composer\.(json|lock)|package\.json|phpunit\.xml|vite\.config\.js|README\.md)$ - [F,L,NC]
+
+    # Everything else is served from public/.
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+</IfModule>
