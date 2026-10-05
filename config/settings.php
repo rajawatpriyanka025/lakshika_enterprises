@@ -20,6 +20,8 @@ return [
         'popup_show_whatsapp' => '1',
         'popup_delay' => '4',
         'popup_frequency_days' => '7',
+        'maintenance_heading' => "We're giving our website a fresh coat of paint",
+        'maintenance_message' => "We're making a few improvements and will be back shortly. You can still reach us on WhatsApp or by phone for enquiries and orders.",
         'default_meta_description' => 'Shop home products from Lakshika Enterprises, available on Amazon, Flipkart and Meesho. Send an enquiry for bulk and dealer orders.',
     ],
 
@@ -68,6 +70,15 @@ return [
                 'popup_show_whatsapp' => ['label' => 'Also show a "Chat on WhatsApp" button', 'type' => 'checkbox', 'rules' => 'nullable|boolean', 'help' => 'Only appears when a WhatsApp number is set.'],
                 'popup_delay' => ['label' => 'Seconds before it appears', 'type' => 'number', 'rules' => 'nullable|integer|min:0|max:60', 'help' => 'A few seconds lets visitors see the page first.'],
                 'popup_frequency_days' => ['label' => 'Show again after (days)', 'type' => 'number', 'rules' => 'nullable|integer|min:0|max:365', 'help' => '0 shows it on every visit (once per browser session). Changing the heading or message shows it again to everyone.'],
+            ],
+        ],
+        'maintenance' => [
+            'label' => 'Maintenance mode',
+            'fields' => [
+                'maintenance_enabled' => ['label' => 'Put the website in maintenance mode', 'type' => 'checkbox', 'rules' => 'nullable|boolean', 'help' => 'Visitors are sent to a "Back soon" page. You stay signed in to the admin and can still browse the full site.'],
+                'maintenance_heading' => ['label' => 'Heading', 'rules' => 'nullable|string|max:100'],
+                'maintenance_message' => ['label' => 'Message', 'type' => 'textarea', 'rules' => 'nullable|string|max:500'],
+                'maintenance_back_at' => ['label' => 'Expected back (optional)', 'rules' => 'nullable|string|max:60', 'help' => 'Shown to visitors, e.g. "Monday, 10 am" or "in about 2 hours".'],
             ],
         ],
         'social' => [

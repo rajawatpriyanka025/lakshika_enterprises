@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
@@ -20,6 +21,7 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/whatsapp', WhatsappController::class)->middleware('throttle:30,1')->name('whatsapp');
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('/robots.txt', RobotsController::class)->name('robots');
+Route::get('/maintenance', MaintenanceController::class)->name('maintenance');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {

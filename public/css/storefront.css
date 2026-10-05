@@ -323,6 +323,19 @@ a.contact-card:hover { border-color: var(--forest); }
 .collection-tile:has(.tile-image) .collection-title, .collection-tile:has(.tile-image) .collection-count, .collection-tile:has(.tile-image) .collection-number { position: relative; z-index: 1; color: #fff; text-shadow: 0 1px 8px rgba(0, 20, 40, .5); }
 .article-image { max-width: 980px; margin: 0 auto; padding: 0 30px; }
 .article-image img { width: 100%; height: auto; }
+.maintenance-body { min-height: 100vh; display: flex; flex-direction: column; }
+.maintenance-preview { padding: 10px 16px; color: #fff; background: var(--clay); text-align: center; font-size: 13px; }
+.maintenance { flex: 1; width: min(620px, calc(100% - 32px)); margin: 0 auto; padding: 64px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.maintenance-logo { width: auto; height: 84px; margin-bottom: 36px; }
+.maintenance h1 { margin: 14px 0 16px; font-family: var(--serif); font-size: clamp(30px, 5vw, 44px); font-weight: 400; line-height: 1.2; }
+.maintenance > p { margin: 0; color: var(--muted); font-size: 16px; }
+.maintenance-back { margin-top: 18px !important; }
+.maintenance-back strong { color: var(--ink); }
+.maintenance-actions { margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.maintenance-actions .button { justify-content: center; gap: 10px; }
+.maintenance-email { margin-top: 18px !important; font-size: 14px !important; }
+.maintenance-email a { color: var(--forest); text-decoration: underline; }
+
 @media (max-width: 900px) {
     .header-inner { width: calc(100% - 44px); gap: 15px; }
     .main-nav { gap: 17px; }

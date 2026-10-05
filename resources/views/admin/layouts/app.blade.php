@@ -40,6 +40,7 @@
             ['Contact, map & reviews', ['admin.settings.edit', 'contact'], null, null, request()->routeIs('admin.settings.*') && request()->route('group') === 'contact'],
             ['Welcome popup', ['admin.settings.edit', 'popup'], null, null, request()->routeIs('admin.settings.*') && request()->route('group') === 'popup'],
             ['Social profiles', ['admin.settings.edit', 'social'], null, null, request()->routeIs('admin.settings.*') && request()->route('group') === 'social'],
+            ['Maintenance mode', ['admin.settings.edit', 'maintenance'], null, null, request()->routeIs('admin.settings.*') && request()->route('group') === 'maintenance'],
             ['My account', 'admin.account.edit', 'admin.account.*'],
         ],
     ];
@@ -92,6 +93,9 @@
             <div class="page-actions">@yield('actions')</div>
         </div>
 
+        @if (setting('maintenance_enabled'))
+            <div class="flash flash-error" role="status">The website is in maintenance mode. Visitors see the <a href="{{ route('maintenance') }}" target="_blank" rel="noopener">maintenance page</a>. <a href="{{ route('admin.settings.edit', 'maintenance') }}">Turn it off</a></div>
+        @endif
         @if (session('status'))
             <div class="flash flash-success" role="status">✓ {{ session('status') }}</div>
         @endif

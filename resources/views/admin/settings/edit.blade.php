@@ -31,7 +31,10 @@
                         'placeholder' => config("settings.defaults.{$settingKey}")])
             @endswitch
         @endforeach
-        <div class="form-actions"><button class="btn btn-primary" type="submit">Save settings</button></div>
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Save settings</button>
+            @if ($group === 'maintenance')<a class="btn" href="{{ route('maintenance') }}" target="_blank" rel="noopener">Preview maintenance page ↗</a>@endif
+        </div>
     </form>
 
     @if ($group === 'seo')
